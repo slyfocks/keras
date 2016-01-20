@@ -1,7 +1,7 @@
 import theano
 from theano import tensor as T
 from theano.sandbox.rng_mrg import MRG_RandomStreams as RandomStreams
-from theano.tensor.signal import downsample
+from theano.tensor.signal import pool
 import numpy as np
 from .common import _FLOATX, _EPSILON
 
@@ -642,12 +642,12 @@ def pool2d(x, pool_size, strides=(1, 1), border_mode='valid',
         x = x.dimshuffle((0, 3, 1, 2))
 
     if pool_mode == 'max':
-        pool_out = downsample.max_pool_2d(x, ds=pool_size, st=strides,
+        pool_out = pool.max_pool_2d(x, ds=pool_size, st=strides,
                                           ignore_border=ignore_border,
                                           padding=padding,
                                           mode='max')
     elif pool_mode == 'avg':
-        pool_out = downsample.max_pool_2d(x, ds=pool_size, st=strides,
+        pool_out = pool.max_pool_2d(x, ds=pool_size, st=strides,
                                           ignore_border=ignore_border,
                                           padding=padding,
                                           mode='average_exc_pad')
